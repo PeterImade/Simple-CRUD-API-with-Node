@@ -1,10 +1,11 @@
 const express = require("express")
 const status = require("./status_codes")
 const data = require("./data")
+const dotenv = require("dotenv")
+dotenv.config()
 
 const app = express()
-
-const port = process.env.PORT || 3000
+const port = process.env.PORT
 
 // app.get("/", (req, res) => {
 //     res.status(status.HTTP_200_OK).send("<h1>Hello World</h1>. <h3>Welcome to our home page</h3>")
@@ -103,7 +104,7 @@ app.all("*", (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log("Server is running on port 3000");
+    console.log(`Server is running on port ${port}`);
 })
 
 //app.get
