@@ -1,16 +1,36 @@
-const http = require("http")
+const express = require("express")
+const app = express()
+const status = require("./status_codes")
 
-const server = http.createServer((req, res) => {
-    res.statusCode = 200
-    res.setHeader("Content-Type", "text/plain")
-    res.end("Hello world\n")
-});
+app.use(middlewareThree)
+app.use(middleWareOne)
 
-server.on("request", (req, res) => {
-    console.log("Request Received for: " + req.url);
+app.get("/", middlewareTwo, middlewareFour, (req, res) => {
+    console.log("Inside Home Page");
+    res.send("Home Page")
 })
 
-server.listen(3000, () => {
-    console.log("Server is running at port 3000...");
-})
 
+function middleWareOne(req, res, next) {
+    console.log("Middleware One");
+    next()
+}
+
+function middlewareTwo(req, res, next) {
+    console.log("Middleware Two")
+    next()
+}
+
+function middlewareThree(req, res, next) {
+    console.log("Middleware Three")
+    next()
+}
+
+function middlewareFour(req, res, next) {
+    console.log("Middleware Four")
+    next()
+}
+
+app.listen(3000, () => {
+    console.log(`Server is running`);
+})
